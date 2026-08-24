@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>나은 & 도형 성장 기록 일기</title>
+  
+  <!-- CSS 스타일 -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Apache ECharts 라이브러리 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+  <!-- Firebase SDK (v9 호환 모듈) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>🌱 나은 & 도형 성장 기록</h1>
+      <p class="subtitle">우리 아이들의 키와 몸무게 성장 다이어리</p>
+    </header>
+
+    <!-- 1. 새 기록 추가 폼 -->
+    <section class="card form-section">
+      <h2>📝 새 성장 기록 추가</h2>
+      <form id="growth-form">
+        <div class="form-row child-selector">
+          <label>아이 선택:</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="child-name" value="나은" checked />
+              <span class="badge naeun">나은 (2017.10.22)</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="child-name" value="도형" />
+              <span class="badge dohyeong">도형 (2020.12.07)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="record-date">측정 일자</label>
+            <input type="date" id="record-date" required />
+            <div id="calculated-age" class="age-preview">월령: -</div>
+          </div>
+
+          <div class="input-group">
+            <label for="record-height">키 (cm)</label>
+            <input type="number" id="record-height" step="0.1" placeholder="예: 110.5" />
+          </div>
+
+          <div class="input-group">
+            <label for="record-weight">몸무게 (kg)</label>
+            <input type="number" id="record-weight" step="0.1" placeholder="예: 18.2" />
+          </div>
+
+          <div class="input-group full-width">
+            <label for="record-memo">메모 (선택)</label>
+            <input type="text" id="record-memo" placeholder="예: 정기 영유아검진, 병원 측정 등" />
+          </div>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn primary-btn">+ 기록 등록하기</button>
+      </form>
+    </section>
+
+    <!-- 2. ECharts 성장 그래프 영역 -->
+    <section class="card chart-section">
+      <div class="section-header">
+        <h2>📈 월령별 성장 곡선 오버랩</h2>
+        <span class="swipe-notice">👈 좌우로 스와이프 및 줌이 가능합니다 👉</span>
+      </div>
+      <!-- ECharts 렌더링 컨테이너 -->
+      <div id="growth-chart" class="chart-container"></div>
+    </section>
+
+    <!-- 3. 상세 기록 표 & 필터 -->
+    <section class="card table-section">
+      <div class="section-header flex-between">
+        <h2>📋 상세 기록 표</h2>
+        <div class="filter-group">
+          <button class="filter-btn active" data-filter="all">전체보기</button>
+          <button class="filter-btn" data-filter="나은">나은</button>
+          <button class="filter-btn" data-filter="도형">도형</button>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>아이</th>
+              <th>측정일자</th>
+              <th>월령</th>
+              <th>키 (cm)</th>
+              <th>몸무게 (kg)</th>
+              <th>메모</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody id="record-table-body">
+            <tr>
+              <td colspan="7" class="loading-text">데이터를 불러오는 중입니다...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- 자바스크립트 모듈 로드 -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
