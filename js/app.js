@@ -43,7 +43,7 @@ function renderTable() {
   });
 
   // 측정일자 기준 오름차순(측정순) 정렬
-  const displayList = [...filtered].sort((a, b) => new Date(a.date) - new Date(b.date));
+  const displayList = [...filtered].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   if (displayList.length === 0) {
     tableBody.innerHTML = `<tr><td colspan="7" class="loading-text">기록된 데이터가 없습니다.</td></tr>`;
