@@ -42,8 +42,8 @@ function renderTable() {
     return r.name === currentFilter;
   });
 
-  // 표는 최신 날짜가 위로 오도록 내림차순 정렬
-  const displayList = [...filtered].sort((a, b) => new Date(b.date) - new Date(a.date));
+  // 표: 최초 측정일(과거)부터 최신 측정일 순서로 오름차순 정렬
+  const displayList = [...filtered].sort((a, b) => new Date(a.date) - new Date(b.date));
 
   if (displayList.length === 0) {
     tableBody.innerHTML = `<tr><td colspan="7" class="loading-text">기록된 데이터가 없습니다.</td></tr>`;
@@ -136,3 +136,4 @@ window.addEventListener("DOMContentLoaded", () => {
     renderTable();
   });
 });
+`
