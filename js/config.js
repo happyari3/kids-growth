@@ -14,13 +14,13 @@ const CHILDREN_INFO = {
 
 // 2. Firebase 프로젝트 설정 (Firebase 콘솔 웹 앱 등록 시 발급받은 키 값 입력)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDyXW4GwPQYWLXEdggFDRid0b18zNhwkVc",
+  authDomain: "kids-height-83101.firebaseapp.com",
+  databaseURL: "https://kids-height-83101-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "kids-height-83101",
+  storageBucket: "kids-height-83101.firebasestorage.app",
+  messagingSenderId: "1004135131650",
+  appId: "1:1004135131650:web:5f6ca04803a0f465f1151b"
 };
 
 // Firebase 초기화
