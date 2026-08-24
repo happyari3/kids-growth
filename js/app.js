@@ -1,5 +1,5 @@
 /**
- * app.js: 입력 폼 처리, 표 렌더링 및 필터링, 전체 앱 라이프사이클 관리
+ * app.js: 입력 폼 처리, 표 렌더링(측정순 정렬) 및 필터링, 전체 앱 라이프사이클 관리
  */
 
 let allRecords = [];
@@ -34,7 +34,7 @@ function updateAgePreview() {
   calculatedAgeDiv.textContent = `월령: ${ageInfo.ageText} (${ageInfo.totalMonths}개월)`;
 }
 
-// 3. 기록 표 렌더링 함수
+// 3. 기록 표 렌더링 함수 (측정순 / 오래된 날짜 -> 최신 날짜 오름차순)
 function renderTable() {
   // 필터 적용
   const filtered = allRecords.filter((r) => {
@@ -42,7 +42,7 @@ function renderTable() {
     return r.name === currentFilter;
   });
 
-  // 표: 최초 측정일(과거)부터 최신 측정일 순서로 오름차순 정렬
+  // 측정일자 기준 오름차순(측정순) 정렬
   const displayList = [...filtered].sort((a, b) => new Date(a.date) - new Date(b.date));
 
   if (displayList.length === 0) {
@@ -136,4 +136,3 @@ window.addEventListener("DOMContentLoaded", () => {
     renderTable();
   });
 });
-`
